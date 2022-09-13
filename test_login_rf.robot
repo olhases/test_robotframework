@@ -3,7 +3,7 @@ Library         SeleniumLibrary
 Documentation   Suite description #automated tests for scout website
 
 *** Variables ***
-${LOGIN URL}        https://scouts-test.futbolkolektyw.pl/en
+${LOGIN URL}        https://scouts.futbolkolektyw.pl/en/
 ${REMINDPASSWORD URL}
 ${BROWSER}          Chrome
 ${SIGNINBUTTON}     xpath=//child::div/button
@@ -27,6 +27,7 @@ ${SURNAMEFIELD}     xpath=//input[@name='surname']
 ${AGEFIELD}     xpath=//input[@name='age']
 ${MAINPOSITIONFIELD}        xpath=//input[@name='mainPosition']
 ${SUBMITPLAYERBUTTON}       xpath=//button[@type='submit']
+${ADDPLAYERTITLE}       xpath=(//span[@class='MuiTypography-root MuiCardHeader-title MuiTypography-h5 MuiTypography-displayBlock'])[1]
 
 ${MATCHESBUTTON}        xpath=(//div[@role='button'])[4]
 ${SEARCHFIELD}      xpath=//input[@placeholder='Search…']
@@ -88,6 +89,7 @@ Add player
     Click on the Submit button
     Assert dashboard
     Click on the Add player button
+    Assert add player page
     Type in Name
     Type in Surname
     Type in Age
@@ -134,4 +136,9 @@ Click on the Submit player button
 Assert dashboard
     wait until element is visible   ${PAGELOGO}
     title should be     Scouts panel
+    Capture Page Screenshot     alert.png
+
+Assert add player page
+    wait until element is visible   ${ADDPLAYERTITLE}
+    title should be     Add player
     Capture Page Screenshot     alert.png
